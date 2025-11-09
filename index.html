@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tech Del Upside Down - Los mejores gadgets y productos tech para fans de Stranger Things. Guías, reviews y ofertas de Amazon.">
+    <meta name="keywords" content="stranger things, gadgets, tech, gaming, funkos, regalos, amazon, setup gaming">
+    <title>Tech Del Upside Down - Gadgets para Fans de Stranger Things</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --upside-red: #BF0A0D;
+            --dark-bg: #0D0D0D;
+            --light-text: #F5F5F5;
+            --accent-cyan: #00D9FF;
+            --accent-magenta: #FF006E;
+            --gray: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        /* Header amb navegació */
+        header {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--gray) 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--upside-red);
+            box-shadow: 0 4px 6px rgba(191, 10, 13, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--upside-red);
+            text-shadow: 0 0 10px rgba(191, 10, 13, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid var(--upside-red);
+            color: var(--light-text);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: var(--upside-red);
+            box-shadow: 0 0 15px rgba(191, 10, 13, 0.7);
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--upside-red) 0%, #6B0406 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1) 0px,
+                transparent 2px,
+                transparent 4px,
+                rgba(0, 0, 0, 0.1) 6px
+            );
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            letter-spacing: 3px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Grid d'articles */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-card {
+            background: var(--gray);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--upside-red);
+            box-shadow: 0 8px 20px rgba(191, 10, 13, 0.4);
+        }
+
+        .article-card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--upside-red), var(--accent-magenta));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .article-card-content {
+            padding: 1.5rem;
+        }
+
+        .article-card h2 {
+            color: var(--upside-red);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .article-card p {
+            color: #CCC;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            background: var(--upside-red);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .read-more:hover {
+            background: #8B0000;
+            box-shadow: 0 0 15px rgba(191, 10, 13, 0.7);
+        }
+
+        /* Article complet */
+        .article-full {
+            display: none;
+            background: var(--gray);
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .article-full.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .article-full h1 {
+            color: var(--upside-red);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(191, 10, 13, 0.3);
+        }
+
+        .article-full h2 {
+            color: var(--accent-cyan);
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            border-left: 4px solid var(--upside-red);
+            padding-left: 1rem;
+        }
+
+        .article-full h3 {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .article-full p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .article-full ul, .article-full ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .article-full li {
+            margin-bottom: 0.7rem;
+            line-height: 1.7;
+        }
+
+        .article-full strong {
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* Enllaços d'afiliats destacats */
+        .affiliate-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--upside-red), var(--accent-magenta));
+            color: white;
+            padding: 1rem 2rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .affiliate-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(191, 10, 13, 0.8);
+            border-color: white;
+        }
+
+        .affiliate-placeholder {
+            background: #FFD700;
+            color: #000;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            border: 3px dashed #FF6B00;
+        }
+
+        /* Botons socials */
+        .social-share {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+        }
+
+        .pinterest-btn {
+            background: #E60023;
+        }
+
+        .pinterest-btn:hover {
+            background: #AD001B;
+            box-shadow: 0 0 15px rgba(230, 0, 35, 0.5);
+        }
+
+        .twitter-btn {
+            background: #1DA1F2;
+        }
+
+        .facebook-btn {
+            background: #4267B2;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        /* Back button */
+        .back-btn {
+            background: var(--gray);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--upside-red);
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: var(--upside-red);
+            box-shadow: 0 0 15px rgba(191, 10, 13, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 3px solid var(--upside-red);
+            margin-top: 4rem;
+        }
+
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--gray);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border-left: 4px solid var(--upside-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-full {
+                padding: 1.5rem;
+            }
+
+            .article-full h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Efecte de "glitch" subtil al logo */
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 10px rgba(191, 10, 13, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(191, 10, 13, 0.8), 0 0 30px rgba(0, 217, 255, 0.5); }
+        }
+
+        .logo {
+            animation: glitch 3s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">⚡ TECH DEL UPSIDE DOWN</div>
+            <div class="lang-selector">
+                <button class="lang-btn active" onclick="setLanguage('es')" data-lang="es">Español</button>
+                <button class="lang-btn" onclick="setLanguage('ca')" data-lang="ca">Català</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="lang-es">🎮 Bienvenido al Lado Oscuro de la Tecnología</h1>
+            <h1 class="lang-ca" style="display:none;">🎮 Benvingut al Costat Fosc de la Tecnologia</h1>
+            
+            <p class="lang-es">Los mejores gadgets tech, setups gaming y coleccionables para fans de Stranger Things. Porque ser fan no es solo ver la serie, es vivirla.</p>
+            <p class="lang-ca" style="display:none;">Els millors gadgets tech, setups gaming i col·leccionables per a fans d'Stranger Things. Perquè ser fan no és només veure la sèrie, és viure-la.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Grid d'articles (pàgina principal) -->
+        <div id="articles-grid" class="articles-grid">
+            <!-- Article 1 -->
+            <div class="article-card" onclick="showArticle('article1')">
+                <div class="article-card-image">💻</div>
+                <div class="article-card-content">
+                    <h2 class="lang-es">Los 10 Mejores Gadgets Tech para Fans de Stranger Things 2025</h2>
+                    <h2 class="lang-ca" style="display:none;">Els 10 Millors Gadgets Tech per a Fans d'Stranger Things 2025</h2>
+                    
+                    <p class="lang-es">Descubre los gadgets tecnológicos imprescindibles que combinen la nostalgia de los 80s con la tecnología más actual. Desde iluminación LED hasta teclados mecánicos RGB.</p>
+                    <p class="lang-ca" style="display:none;">Descobreix els gadgets tecnològics imprescindibles que combinen la nostàlgia dels 80 amb la tecnologia més actual. Des d'il·luminació LED fins a teclats mecànics RGB.</p>
+                    
+                    <a href="#" class="read-more lang-es" onclick="event.stopPropagation(); showArticle('article1')">Leer más →</a>
+                    <a href="#" class="read-more lang-ca" style="display:none;" onclick="event.stopPropagation(); showArticle('article1')">Llegir més →</a>
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="article-card" onclick="showArticle('article2')">
+                <div class="article-card-image">🎭</div>
+                <div class="article-card-content">
+                    <h2 class="lang-es">Guía Definitiva: Funkos de Stranger Things - Cuáles Valen la Pena</h2>
+                    <h2 class="lang-ca" style="display:none;">Guia Definitiva: Funkos d'Stranger Things - Quins Valen la Pena</h2>
+                    
+                    <p class="lang-es">Todos los Funkos Pop de Stranger Things analizados. Desde Eleven hasta Eddie Munson, te contamos cuáles son imprescindibles para tu colección.</p>
+                    <p class="lang-ca" style="display:none;">Tots els Funkos Pop d'Stranger Things analitzats. Des d'Eleven fins a Eddie Munson, et contem quins són imprescindibles per a la teva col·lecció.</p>
+                    
+                    <a href="#" class="read-more lang-es" onclick="event.stopPropagation(); showArticle('article2')">Leer más →</a>
+                    <a href="#" class="read-more lang-ca" style="display:none;" onclick="event.stopPropagation(); showArticle('article2')">Llegir més →</a>
+                </div>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="article-card" onclick="showArticle('article3')">
+                <div class="article-card-image">🎮</div>
+                <div class="article-card-content">
+                    <h2 class="lang-es">Cómo Crear el Setup Gaming Perfecto Inspirado en Stranger Things</h2>
+                    <h2 class="lang-ca" style="display:none;">Com Crear el Setup Gaming Perfecte Inspirat en Stranger Things</h2>
+                    
+                    <p class="lang-es">Guía completa paso a paso para montar un setup gaming épico que haría sentir orgulloso al Hellfire Club. Tres presupuestos: 300€, 800€ y 2000€.</p>
+                    <p class="lang-ca" style="display:none;">Guia completa pas a pas per muntar un setup gaming èpic que faria sentir orgullós l'Hellfire Club. Tres pressupostos: 300€, 800€ i 2000€.</p>
+                    
+                    <a href="#" class="read-more lang-es" onclick="event.stopPropagation(); showArticle('article3')">Leer más →</a>
+                    <a href="#" class="read-more lang-ca" style="display:none;" onclick="event.stopPropagation(); showArticle('article3')">Llegir més →</a>
+                </div>
+            </div>
+
+            <!-- Article 4 -->
+            <div class="article-card" onclick="showArticle('article4')">
+                <div class="article-card-image">🛍️</div>
+                <div class="article-card-content">
+                    <h2 class="lang-es">Black Friday 2025: Las Mejores Ofertas Tech para Fans de Stranger Things</h2>
+                    <h2 class="lang-ca" style="display:none;">Black Friday 2025: Les Millors Ofertes Tech per a Fans d'Stranger Things</h2>
+                    
+                    <p class="lang-es">Calendario completo del Black Friday con las mejores ofertas en tech, gaming y merchandising. Qué comprar cada día para no perder ni una oportunidad.</p>
+                    <p class="lang-ca" style="display:none;">Calendari complet del Black Friday amb les millors ofertes en tech, gaming i merchandising. Què comprar cada dia per no perdre cap oportunitat.</p>
+                    
+                    <a href="#" class="read-more lang-es" onclick="event.stopPropagation(); showArticle('article4')">Leer más →</a>
+                    <a href="#" class="read-more lang-ca" style="display:none;" onclick="event.stopPropagation(); showArticle('article4')">Llegir més →</a>
+                </div>
+            </div>
+
+            <!-- Article 5 -->
+            <div class="article-card" onclick="showArticle('article5')">
+                <div class="article-card-image">🎁</div>
+                <div class="article-card-content">
+                    <h2 class="lang-es">Regalos Tech Perfectos para Fans de Stranger Things - Guía por Presupuesto</h2>
+                    <h2 class="lang-ca" style="display:none;">Regals Tech Perfectes per a Fans d'Stranger Things - Guia per Pressupost</h2>
+                    
+                    <p class="lang-es">Desde 10€ hasta regalos premium de 200€+. Ideas para cumpleaños, Navidad y cualquier ocasión. Porque el regalo perfecto existe.</p>
+                    <p class="lang-ca" style="display:none;">Des de 10€ fins a regals premium de 200€+. Idees per aniversaris, Nadal i qualsevol ocasió. Perquè el regal perfecte existeix.</p>
+                    
+                    <a href="#" class="read-more lang-es" onclick="event.stopPropagation(); showArticle('article5')">Leer más →</a>
+                    <a href="#" class="read-more lang-ca" style="display:none;" onclick="event.stopPropagation(); showArticle('article5')">Llegir més →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLE 1 COMPLET -->
+        <div id="article1" class="article-full">
+            <button class="back-btn" onclick="showGrid()">← <span class="lang-es">Volver</span><span class="lang-ca" style="display:none;">Tornar</span></button>
+            
+            <div class="social-share">
+                <a href="#" class="social-btn pinterest-btn" onclick="shareOnPinterest('article1')">📌 <span class="lang-es">Guardar en Pinterest</span><span class="lang-ca" style="display:none;">Desar a Pinterest</span></a>
+                <a href="#" class="social-btn twitter-btn">🐦 Twitter</a>
+                <a href="#" class="social-btn facebook-btn">👍 Facebook</a>
+                <a href="#" class="social-btn whatsapp-btn">💬 WhatsApp</a>
+            </div>
+
+            <h1 class="lang-es">Los 10 Mejores Gadgets Tech para Fans de Stranger Things 2025</h1>
+            <h1 class="lang-ca" style="display:none;">Els 10 Millors Gadgets Tech per a Fans d'Stranger Things 2025</h1>
+
+            <!-- Contingut ES -->
+            <div class="lang-es">
+                <p>Mira, si eres fan de Stranger Things y además te flipa la tecnología, acabas de encontrar tu sitio. He reunido los mejores gadgets que mezclan lo mejor de los dos mundos: esa nostalgia ochenteraque nos da la serie con lo más top en tecnología de 2025.</p>
+
+                <p>Desde luces LED que te harán sentir como Joyce intentando hablar con Will, hasta teclados gaming que Eddie Munson tendría en su cuarto si viviera en nuestra época. Aquí encontrarás todo lo que necesitas para montar tu espacio perfecto de fan.</p>
+
+                <h2>1. Tiras LED RGB: Crea tu propio Upside Down</h2>
+                
+                <p>¿Te acuerdas de las luces de Navidad de Joyce? Pues esto es la versión mejorada. Las tiras LED RGB te permiten personalizar la iluminación de tu habitación como quieras, con millones de colores diferentes.</p>
+
+                <p><strong>¿Por qué son perfectas para fans de ST?</strong></p>
+                <ul>
+                    <li>Puedes crear ambientes oscuros y misteriosos tipo Upside Down</li>
+                    <li>Las controlas desde el móvil, nada de cables locos</li>
+                    <li>Se sincronizan con la música de la serie (sí, en serio)</li>
+                    <li>Algunos modelos reaccionan al sonido</li>
+                </ul>
+
+                <p><strong>Características que molan:</strong></p>
+                <ul>
+                    <li>Longitudes desde 5 hasta 20 metros</li>
+                    <li>Control por app o mando a distancia</li>
+                    <li>Adhesivo para poner donde quieras</li>
+                    <li>Consumen poco, no te va a explotar la factura de la luz</li>
+                </ul>
+
+                <p>Las que mejor van son las que puedes controlar por app. Así creas escenas personalizadas: todo en rojo cuando ves escenas del Upside Down, o colores cálidos para las partes más nostálgicas de los 80s.</p>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-TIRAS-LED-RGB-5M] - Tiras LED RGB 5m con control por app - Precio aproximado: 15-30€
+                </div>
+
+                <p><strong>Precio aproximado:</strong> 15-40€ según lo largas que las quieras</p>
+
+                <h2>2. Teclado Mecánico RGB Gaming: Digno del Hellfire Club</h2>
+
+                <p>Si Eddie Munson tuviera un setup gaming moderno, definitivamente tendría un teclado mecánico con luces RGB. Estos teclados no solo quedan de lujo, sino que mejoran tu experiencia al escribir o jugar una barbaridad.</p>
+
+                <p><strong>¿Qué tienen de especial?</strong></p>
+                <ul>
+                    <li>Respuesta táctil que te encantará al teclear</li>
+                    <li>Duran una eternidad (50-100 millones de pulsaciones)</li>
+                    <li>Ese sonido satisfactorio cuando escribes</li>
+                    <li>Iluminación RGB que puedes personalizar a tu rollo</li>
+                </ul>
+
+                <p><strong>Ventajas para fans:</strong></p>
+                <ul>
+                    <li>Perfecto para maratones escribiendo teorías sobre ST</li>
+                    <li>Ideal si juegas a D&D online como el Hellfire Club</li>
+                    <li>La iluminación RGB combina con cualquier setup temático</li>
+                    <li>Muchos tienen ese diseño retro-futurista que mola tanto</li>
+                </ul>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-TECLADO-MECANICO-RGB] - Teclado mecánico RGB gaming - Precio aproximado: 40-120€
+                </div>
+
+                <p><strong>Precio aproximado:</strong> 40-120€</p>
+
+                <h2>3. Auriculares Vintage Style con Tecnología Moderna</h2>
+
+                <p>La estética ochenteros está de vuelta, y los auriculares retro son la prueba. Las marcas están creando auriculares con diseño vintage pero con tecnología actual: Bluetooth 5.0, cancelación de ruido, batería que dura un montón.</p>
+
+                <p><strong>¿Por qué son ideales?</strong></p>
+                <ul>
+                    <li>Diseño nostálgico que recuerda a los walkman de los 80s</li>
+                    <li>Tecnología moderna (Bluetooth, cancelación de ruido, etc.)</li>
+                    <li>Comodidad para maratones de la serie</li>
+                    <li>Calidad de sonido brutal</li>
+                </ul>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-AURICULARES-VINTAGE] - Auriculares Bluetooth estilo vintage - Precio aproximado: 30-80€
+                </div>
+
+                <p>Son perfectos para escuchar el soundtrack de Stranger Things (Running Up That Hill, Master of Puppets...) con la mejor calidad mientras mantienes esa estética ochentosa que tanto nos gusta.</p>
+
+                <h2>4. Altavoz Bluetooth Retro: Los 80s se encuentran con 2025</h2>
+
+                <p>Imagina un altavoz que parece sacado de 1985 pero que funciona con Bluetooth y tiene una calidad de sonido increíble. Eso es exactamente lo que ofrecen los altavoces retro modernos.</p>
+
+                <p><strong>Lo mejor de estos altavoces:</strong></p>
+                <ul>
+                    <li>Diseño vintage (madera, botones analógicos, rejillas de tela)</li>
+                    <li>Conectividad Bluetooth</li>
+                    <li>Algunos incluyen radio FM (muy ochentero)</li>
+                    <li>Batería recargable o conexión eléctrica</li>
+                </ul>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-ALTAVOZ-RETRO] - Altavoz Bluetooth diseño retro - Precio aproximado: 25-70€
+                </div>
+
+                <h2>5. Reloj Digital Retro: Como en la habitación de Will</h2>
+
+                <p>Los relojes digitales de los años 80 tienen un rollo especial. Con pantallas LED rojas o verdes, son perfectos para tu mesita de noche y te transportarán directamente a Hawkins.</p>
+
+                <p><strong>Por qué conseguir uno:</strong></p>
+                <ul>
+                    <li>Estética 100% años 80</li>
+                    <li>Funcional (alarma, temperatura, fecha)</li>
+                    <li>Pantalla LED grande y legible</li>
+                    <li>Algunos proyectan la hora en el techo</li>
+                </ul>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-RELOJ-DIGITAL-RETRO] - Reloj despertador digital retro - Precio aproximado: 20-45€
+                </div>
+
+                <h2>Conclusión: Crea tu espacio perfecto de fan</h2>
+
+                <p>Estos gadgets no solo son funcionales, te permiten crear un espacio que refleje tu pasión por Stranger Things. No necesitas comprártelos todos de golpe; empieza con uno o dos que más te molen y ve construyendo tu setup ideal.</p>
+
+                <p>La combinación de tecnología moderna con estética retro es exactamente lo que representa Stranger Things: un puente entre el pasado nostálgico y el presente tecnológico.</p>
+
+                <p><strong>Mi recomendación personal:</strong> Si solo puedes elegir tres, ve a por las tiras LED (transforman el ambiente completamente), un teclado mecánico (lo usarás cada día), y auriculares vintage (para disfrutar el soundtrack como se merece).</p>
+
+                <p>¿Cuál de estos gadgets añadirías primero a tu colección? Todos están disponibles en Amazon con envío rápido a España.</p>
+            </div>
+
+            <!-- Contingut CA -->
+            <div class="lang-ca" style="display:none;">
+                <p>Mira, si ets fan d'Stranger Things i a més t'encanta la tecnologia, acabes de trobar el teu lloc. He reunit els millors gadgets que barregen el millor dels dos mons: aquella nostàlgia dels vuitanta que ens dona la sèrie amb el més top en tecnologia del 2025.</p>
+
+                <p>Des de llums LED que et faran sentir com la Joyce intentant parlar amb en Will, fins a teclats gaming que l'Eddie Munson tindria a la seva habitació si visqués a la nostra època. Aquí trobaràs tot el que necessites per muntar el teu espai perfecte de fan.</p>
+
+                <h2>1. Tires LED RGB: Crea el teu propi Upside Down</h2>
+                
+                <p>Et recordes dels llums de Nadal de la Joyce? Doncs això és la versió millorada. Les tires LED RGB et permeten personalitzar la il·luminació de la teva habitació com vulguis, amb milions de colors diferents.</p>
+
+                <p><strong>Per què són perfectes per a fans de ST?</strong></p>
+                <ul>
+                    <li>Pots crear ambients foscos i misteriosos tipus Upside Down</li>
+                    <li>Les controles des del mòbil, res de cables bojos</li>
+                    <li>Se sincronitzen amb la música de la sèrie (sí, de debò)</li>
+                    <li>Alguns models reaccionen al so</li>
+                </ul>
+
+                <div class="affiliate-placeholder">
+                    [ENLLAÇ-AMAZON-TIRES-LED-RGB-5M] - Tires LED RGB 5m amb control per app - Preu aproximat: 15-30€
+                </div>
+
+                <p><strong>Preu aproximat:</strong> 15-40€ segons el llargues que les vulguis</p>
+
+                <h2>2. Teclat Mecànic RGB Gaming: Digne de l'Hellfire Club</h2>
+
+                <p>Si l'Eddie Munson tingués un setup gaming modern, definitivament tindria un teclat mecànic amb llums RGB. Aquests teclats no només queden de luxe, sinó que milloren la teva experiència en escriure o jugar una barbaritat.</p>
+
+                <div class="affiliate-placeholder">
+                    [ENLLAÇ-AMAZON-TECLAT-MECANIC-RGB] - Teclat mecànic RGB gaming - Preu aproximat: 40-120€
+                </div>
+
+                <h2>Conclusió: Crea el teu espai perfecte de fan</h2>
+
+                <p>Aquests gadgets no només són funcionals, et permeten crear un espai que reflecteixi la teva passió per Stranger Things. No necessites comprar-te'ls tots de cop; comença amb un o dos que més t'agradin i ves construint el teu setup ideal.</p>
+            </div>
+
+            <div class="social-share">
+                <a href="#" class="social-btn pinterest-btn" onclick="shareOnPinterest('article1')">📌 <span class="lang-es">Guardar en Pinterest</span><span class="lang-ca" style="display:none;">Desar a Pinterest</span></a>
+            </div>
+        </div>
+
+        <!-- ARTICLE 2 - Els continguts es poden afegir seguint el mateix patró -->
+        <div id="article2" class="article-full">
+            <button class="back-btn" onclick="showGrid()">← <span class="lang-es">Volver</span><span class="lang-ca" style="display:none;">Tornar</span></button>
+            
+            <h1 class="lang-es">Guía Definitiva: Funkos de Stranger Things - Cuáles Valen la Pena</h1>
+            <h1 class="lang-ca" style="display:none;">Guia Definitiva: Funkos d'Stranger Things - Quins Valen la Pena</h1>
+
+            <div class="lang-es">
+                <p>Los Funko Pop de Stranger Things son de los más coleccionados y buscados que hay. Con más de 100 figuras diferentes desde 2017, puede ser complicado saber por dónde empezar o cuáles valen realmente la pena.</p>
+
+                <p>En esta guía te cuento todo lo que necesitas saber para empezar o completar tu colección de Funkos de Stranger Things sin arruinarte en el intento.</p>
+
+                <h2>Los Funkos Imprescindibles (Top 10 para empezar)</h2>
+
+                <h3>1. Eleven (Once) - Versión Clásica con Peluca</h3>
+                
+                <p>Este es EL Funko por excelencia de la serie. Eleven con su peluca rubia del capítulo 7 de la primera temporada es icónico. Es uno de los más buscados y el punto de partida perfecto para cualquier colección.</p>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-FUNKO-ELEVEN-PELUCA] - Funko Pop Eleven con peluca - Precio: 12-16€
+                </div>
+
+                <h3>2. Demogorgon - La criatura del Upside Down</h3>
+
+                <p>No puedes tener una colección de ST sin el antagonista original. El Demogorgon es visualmente brutal con su cabeza abierta y todos esos dientes.</p>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-FUNKO-DEMOGORGON] - Funko Pop Demogorgon - Precio: 13-17€
+                </div>
+
+                <h3>3. Eddie Munson (Hellfire Club)</h3>
+
+                <p>Eddie se robó el corazón de todos en la temporada 4. Su Funko con la camiseta del Hellfire Club es uno de los más vendidos ahora mismo.</p>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-FUNKO-EDDIE-MUNSON] - Funko Pop Eddie Munson - Precio: 15-18€
+                </div>
+
+                <h2>Consejos para Coleccionistas</h2>
+
+                <p><strong>Protege tus Funkos:</strong></p>
+                <ul>
+                    <li>Usa protectores de plástico, sobre todo para los exclusivos. Cuestan 1-2€ cada uno pero mantienen la caja perfecta.</li>
+                    <li>Evita la luz solar directa, los colores se pueden desvanecer.</li>
+                    <li>Si no los exhibes todos, guárdalos en cajas en un sitio seco.</li>
+                </ul>
+
+                <div class="affiliate-placeholder">
+                    [ENLACE-AMAZON-PROTECTORES-FUNKO] - Pack protectores para Funko Pop - Precio: 10-15€
+                </div>
+
+                <h2>Conclusión: Empieza tu colección hoy</h2>
+
+                <p>No necesitas comprar todos los Funkos de golpe. Empieza con tus personajes favoritos y ve construyendo tu colección poco a poco.</p>
+
+                <p><strong>Mi recomendación personal:</strong></p>
+                <ul>
+                    <li>Si solo vas a comprar uno: <strong>Eleven con peluca</strong></li>
+                    <li>Si quieres tres: <strong>Eleven + Eddie + Demogorgon</strong></li>
+                    <li>Si quieres el grupo completo: Consigue los niños primero (Eleven, Mike, Dustin, Lucas, Will, Max)</li>
+                </ul>
+            </div>
+
+            <div class="lang-ca" style="display:none;">
+                <p>Els Funko Pop d'Stranger Things són dels més col·leccionats i buscats que hi ha. Amb més de 100 figures diferents des del 2017, pot ser complicat saber per on començar o quins valen realment la pena.</p>
+
+                <h2>Els Funkos Imprescindibles (Top 10 per començar)</h2>
+
+                <h3>1. Eleven (Once) - Versió Clàssica amb Perruca</h3>
+                
+                <p>Aquest és EL Funko per excel·lència de la sèrie. Eleven amb la seva perruca rossa del capítol 7 de la primera temporada és icònic.</p>
+
+                <div class="affiliate-placeholder">
+                    [ENLLAÇ-AMAZON-FUNKO-ELEVEN-PERRUCA] - Funko Pop Eleven amb perruca - Preu: 12-16€
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLES 3, 4, 5 segueixen el mateix patró -->
+        <!-- Per brevetat, incloc només l'estructura bàsica -->
+        
+        <div id="article3" class="article-full">
+            <button class="back-btn" onclick="showGrid()">← <span class="lang-es">Volver</span><span class="lang-ca" style="display:none;">Tornar</span></button>
+            <h1 class="lang-es">Cómo Crear el Setup Gaming Perfecto Inspirado en Stranger Things</h1>
+            <h1 class="lang-ca" style="display:none;">Com Crear el Setup Gaming Perfecte Inspirat en Stranger Things</h1>
+            
+            <div class="lang-es">
+                <p>Si eres gamer y fan de Stranger Things, ¿por qué no combinar las dos pasiones en un setup épico? Aquí te enseño cómo crear un espacio gaming que haría sentir orgulloso a Eddie Munson y al Hellfire Club.</p>
+                
+                <h2>Presupuesto Principiante (300-500€)</h2>
+                <div class="affiliate-placeholder">
+                    [ENLACES-PRODUCTOS-SETUP-BASICO]
+                </div>
+
+                <h2>Presupuesto Intermedio (800-1200€)</h2>
+                <div class="affiliate-placeholder">
+                    [ENLACES-PRODUCTOS-SETUP-INTERMEDIO]
+                </div>
+
+                <h2>Presupuesto Avanzado (2000€+)</h2>
+                <div class="affiliate-placeholder">
+                    [ENLACES-PRODUCTOS-SETUP-PREMIUM]
+                </div>
+            </div>
+
+            <div class="lang-ca" style="display:none;">
+                <p>Si ets gamer i fan d'Stranger Things, per què no combinar les dues passions en un setup èpic?</p>
+            </div>
+        </div>
+
+        <div id="article4" class="article-full">
+            <button class="back-btn" onclick="showGrid()">← <span class="lang-es">Volver</span><span class="lang-ca" style="display:none;">Tornar</span></button>
+            <h1 class="lang-es">Black Friday 2025: Las Mejores Ofertas Tech para Fans de Stranger Things</h1>
+            <h1 class="lang-ca" style="display:none;">Black Friday 2025: Les Millors Ofertes Tech per a Fans d'Stranger Things</h1>
+            
+            <div class="lang-es">
+                <p>El Black Friday es EL momento del año para conseguir tecnología a precios increíbles. Si eres fan de Stranger Things y quieres aprovechar, esta guía te dirá exactamente qué comprar.</p>
+                
+                <h2>Calendario Black Friday: Qué Comprar Cuándo</h2>
+                
+                <div class="affiliate-placeholder">
+                    [ENLACES-OFERTAS-BLACK-FRIDAY-ACTUALIZADOS]
+                </div>
+            </div>
+        </div>
+
+        <div id="article5" class="article-full">
+            <button class="back-btn" onclick="showGrid()">← <span class="lang-es">Volver</span><span class="lang-ca" style="display:none;">Tornar</span></button>
+            <h1 class="lang-es">Regalos Tech Perfectos para Fans de Stranger Things - Guía por Presupuesto</h1>
+            <h1 class="lang-ca" style="display:none;">Regals Tech Perfectes per a Fans d'Stranger Things - Guia per Pressupost</h1>
+            
+            <div class="lang-es">
+                <p>¿Buscas el regalo perfecto para un fan de Stranger Things? La combinación de tecnología y la serie es ideal para sorprender.</p>
+                
+                <h2>Regalos Menos de 20€</h2>
+                <div class="affiliate-placeholder">
+                    [ENLACES-REGALOS-ECONOMICOS]
+                </div>
+
+                <h2>Regalos 20-50€</h2>
+                <div class="affiliate-placeholder">
+                    [ENLACES-REGALOS-GAMA-MEDIA]
+                </div>
+
+                <h2>Regalos Premium 100€+</h2>
+                <div class="affiliate-placeholder">
+                    [ENLACES-REGALOS-PREMIUM]
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="disclaimer">
+            <h3 class="lang-es">⚠️ Aviso Legal</h3>
+            <h3 class="lang-ca" style="display:none;">⚠️ Avís Legal</h3>
+            
+            <p class="lang-es">
+                Tech Del Upside Down participa en el Programa de Afiliados de Amazon EU, un programa de publicidad para afiliados diseñado para ofrecer a sitios web un modo de obtener comisiones por publicidad mediante enlaces a Amazon.es. 
+                <br><br>
+                Los precios y disponibilidad de los productos pueden cambiar. Las imágenes son orientativas. Siempre verifica en Amazon antes de comprar.
+                <br><br>
+                Este sitio web es un proyecto de fan para fans. No está afiliado oficialmente con Netflix, los hermanos Duffer ni Stranger Things.
+            </p>
+            
+            <p class="lang-ca" style="display:none;">
+                Tech Del Upside Down participa al Programa d'Afiliats d'Amazon EU, un programa de publicitat per a afiliats dissenyat per oferir a llocs web una manera d'obtenir comissions per publicitat mitjançant enllaços a Amazon.es.
+                <br><br>
+                Els preus i disponibilitat dels productes poden canviar. Les imatges són orientatives. Sempre verifica a Amazon abans de comprar.
+                <br><br>
+                Aquest lloc web és un projecte de fan per a fans. No està afiliat oficialment amb Netflix, els germans Duffer ni Stranger Things.
+            </p>
+        </div>
+        
+        <p style="margin-top: 2rem; opacity: 0.7;">
+            <span class="lang-es">© 2025 Tech Del Upside Down. Hecho con ❤️ para fans de Stranger Things.</span>
+            <span class="lang-ca" style="display:none;">© 2025 Tech Del Upside Down. Fet amb ❤️ per a fans d'Stranger Things.</span>
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Gestió d'idioma
+        let currentLang = 'es';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Actualitzar botons d'idioma
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Mostrar/amagar contingut segons idioma
+            document.querySelectorAll('.lang-es').forEach(el => {
+                el.style.display = lang === 'es' ? '' : 'none';
+            });
+            document.querySelectorAll('.lang-ca').forEach(el => {
+                el.style.display = lang === 'ca' ? '' : 'none';
+            });
+
+            // Desar preferència
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        // Carregar idioma guardat
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) {
+                setLanguage(savedLang);
+            }
+        });
+
+        // Gestió de navegació entre articles
+        function showArticle(articleId) {
+            // Amagar grid d'articles
+            document.getElementById('articles-grid').style.display = 'none';
+            
+            // Amagar tots els articles
+            document.querySelectorAll('.article-full').forEach(article => {
+                article.classList.remove('active');
+            });
+            
+            // Mostrar article seleccionat
+            document.getElementById(articleId).classList.add('active');
+            
+            // Scroll a dalt
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showGrid() {
+            // Mostrar grid
+            document.getElementById('articles-grid').style.display = 'grid';
+            
+            // Amagar tots els articles
+            document.querySelectorAll('.article-full').forEach(article => {
+                article.classList.remove('active');
+            });
+            
+            // Scroll a dalt
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Compartir a Pinterest
+        function shareOnPinterest(articleId) {
+            const url = window.location.href;
+            const pinterestUrl = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent('Descubre los mejores gadgets tech para fans de Stranger Things')}`;
+            window.open(pinterestUrl, '_blank', 'width=750,height=550');
+            return false;
+        }
+
+        // Analytics (afegeix el teu codi de Google Analytics aquí)
+    </script>
+</body>
+</html>
